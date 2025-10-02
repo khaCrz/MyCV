@@ -28,7 +28,7 @@ const translations = {
       responsibilities: [
         "Developed and maintained desktop applications using WPF Framework (.NET 5/6) to support automation workflows in the aviation industry.",
         "Integrated with AWS S3 (data storage), AWS SES (email service), and Microservices architecture for data processing and synchronization.",
-        "Built automated test scenarios using Selenium, NUnit, and MSTest for UI and functional testing.",
+        "Built automated test scription using Selenium, NUnit, and MSTest for UI and functional testing.",
         "Involved in the entire SDLC: requirement analysis, system design, development, testing, and delivery.",
         "Ensured maintainable and scalable solutions following SOLID principles, MVVM pattern, and clean architecture practices."
       ]
@@ -86,7 +86,7 @@ const translations = {
   vi: {
     name: "Phạm Tuấn Kha",
     title: "Kỹ sư Phần mềm",
-    objective: "Là Full stack Software Developer với 2 năm kinh nghiệm, tôi hướng tới việc mở rộng liên tục chuyên môn kỹ thuật và áp dụng các công nghệ hiện đại để xây dựng các ứng dụng web có khả năng mở rộng, hiệu suất cao và tập trung vào người dùng. Tôi được thúc đẩy để cung cấp mã sạch, có thể bảo trì và đóng góp vào các giải pháp sáng tạo tạo ra giá trị kinh doanh thực sự, đồng thời phát triển hướng tới các trách nhiệm cấp cao trong thiết kế hệ thống và hợp tác nhóm.",
+    objective: "Full stack Software Developer với 2 năm kinh nghiệm, tôi hướng tới việc mở rộng liên tục chuyên môn kỹ thuật và áp dụng các công nghệ hiện đại để xây dựng các ứng dụng có khả năng mở rộng, hiệu suất cao và tập trung vào người dùng. Tôi được thúc đẩy để phát triển mã nguồn sạch, có thể bảo trì và đóng góp vào các giải pháp sáng tạo tạo ra giá trị kinh doanh thực sự, đồng thời phát triển hướng tới các trách nhiệm cấp cao trong thiết kế hệ thống và hợp tác đội nhóm.",
     objectiveTitle: "Mục tiêu nghề nghiệp",
     skillsTitle: "Kỹ năng kỹ thuật",
     languagesTitle: "Ngôn ngữ",
@@ -113,7 +113,7 @@ const translations = {
         "Phát triển và bảo trì các ứng dụng desktop sử dụng WPF Framework (.NET 5/6) để hỗ trợ quy trình tự động hóa trong ngành hàng không.",
         "Tích hợp với AWS S3 (lưu trữ dữ liệu), AWS SES (dịch vụ email), và kiến trúc Microservices để xử lý và đồng bộ dữ liệu.",
         "Xây dựng các kịch bản kiểm tra tự động sử dụng Selenium, NUnit, và MSTest cho kiểm tra giao diện và chức năng.",
-        "Tham gia vào toàn bộ SDLC: phân tích yêu cầu, thiết kế hệ thống, phát triển, kiểm thử và giao hàng.",
+        "Tham gia vào toàn bộ quy trình phát triển: Phân tích yêu cầu, Thiết kế hệ thống, Phát triển, Kiểm thử và bàn gian sản phẩm.",
         "Đảm bảo các giải pháp có thể bảo trì và mở rộng theo các nguyên tắc SOLID, mô hình MVVM và thực hành kiến trúc sạch."
       ]
     },
@@ -175,6 +175,9 @@ let currentTheme = localStorage.getItem("cv_theme") || "light";
 function renderLang(lang) {
   const t = translations[lang];
   
+  // Update button text
+  document.getElementById("langBtn").textContent = lang === "en" ? "VI" : "EN";
+
   // Update basic info
   document.getElementById("name").textContent = t.name;
   document.getElementById("title").textContent = t.title;
@@ -277,10 +280,18 @@ function renderLang(lang) {
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
   document.getElementById("themeBtn").textContent = theme === "dark"
-    ? translations[currentLang].dark
-    : translations[currentLang].light;
+    ? translations[currentLang].light
+    : translations[currentLang].dark;
   currentTheme = theme;
   localStorage.setItem("cv_theme", theme);
+
+  // Update version text color based on theme
+  const versionEl = document.getElementById("version");
+  if (theme === "dark") {
+    versionEl.style.color = "#ffffff3d";
+  } else {
+    versionEl.style.color = "#0000003d";
+  }
 }
 
 document.getElementById("langBtn").addEventListener("click", () => {
